@@ -1,12 +1,22 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
 const app = express();
-const port = 4000;
+require('dotenv').config()
 
-// Test
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const pathApi = '/api/v1/'
 
-app.listen(port, () => {
-  console.log(`Server UP corriendo en http://localhost:${port}`);
+app.use( express.urlencoded({extended:true}) );
+app.use( express.json() );
+app.use( cors() );
+
+//ROUTES
+const businessunitsRoutes = require('./routes/businessunits.routes');
+const employeesRoutes = require('./routes/employees.routes');
+
+//USE ROUTES
+app.use( pathApi, businessunitsRoutes );
+app.use( pathApi, employeesRoutes );
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server UP corriendo en http://localhost:${process.env.PORT}`);
 });

@@ -1,0 +1,39 @@
+///////ESTRUCTURA////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+npx sequelize-cli init
+
+npx sequelize-cli db:create
+
+npx sequelize-cli db:migrate
+
+npx sequelize-cli seed:generate --name demo-user
+
+
+
+
+
+
+
+
+
+// SEQUELIZE Model: Business Unit
+npx sequelize-cli model:generate --name BusinessUnit --attributes name:string
+
+// SEQUELIZE Model: Employee
+npx sequelize-cli model:generate --name Employee --attributes firstName:string,lastName:string,code:string,password:string,status:string,role:string,businessUnitId:integer
+
+// SEQUELIZE Model: ######
+npx sequelize-cli model:generate --name 
+
+
+
+
+
+
+
+
+
