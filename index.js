@@ -12,10 +12,12 @@ app.use( cors() );
 //ROUTES
 const businessunitsRoutes = require('./routes/businessunits.routes');
 const employeesRoutes = require('./routes/employees.routes');
+const cashboxesRoutes = require('./routes/cashboxes.routes');
 
 //USE ROUTES
 app.use( pathApi, businessunitsRoutes );
 app.use( pathApi, employeesRoutes );
+app.use( pathApi, cashboxesRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server UP corriendo en http://localhost:${process.env.PORT}`);
