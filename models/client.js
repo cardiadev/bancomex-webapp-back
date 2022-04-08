@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Client.belongsTo(models.Branch);
       Client.belongsTo(models.Employee);
       Client.hasMany(models.Account);
+      Client.hasMany(models.Credit);
     }
   }
   Client.init({

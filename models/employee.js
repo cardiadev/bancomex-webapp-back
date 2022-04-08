@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Employee.hasMany(models.CashCutOff);
       Employee.hasMany(models.Client);
       Employee.hasMany(models.Transaction);
+      Employee.hasMany(models.Credit);
     }
   }
   Employee.init({

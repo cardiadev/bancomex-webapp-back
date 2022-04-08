@@ -63,6 +63,15 @@ npx sequelize-cli model:generate --name Replacement --attributes date:date,CardI
 // SEQUELIZE Model: Transaction
 npx sequelize-cli model:generate --name Transaction --attributes initialAmount:double,endAmount:double,date:date,type:string,amount:double,EmployeeId:integer,CashBoxId:integer,AccountId:integer,ChargeId:integer
 
+// SEQUELIZE Model: Credit
+npx sequelize-cli model:generate --name Credit --attributes applicationDate:date,approvalDate:date,requestedAmount:double,approvedAmount:double,status:string,debTerm:integer,interest:double,commission:double,ClientId:integer,EmployeeId:integer 
+
+// SEQUELIZE Model: Guarantee
+npx sequelize-cli model:generate --name Guarantee --attributes name:string,lastName:string,address:string,phone:string,CreditId:integer
+
+// SEQUELIZE Model: Property
+npx sequelize-cli model:generate --name Property --attributes file:string,value:string,GuaranteeId:integer
+
 // SEQUELIZE Model: ######
 npx sequelize-cli model:generate --name 
 
