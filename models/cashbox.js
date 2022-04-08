@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       CashBox.hasMany(models.CashCutOff);
+      CashBox.hasMany(models.Transaction);
     }
   }
   CashBox.init({

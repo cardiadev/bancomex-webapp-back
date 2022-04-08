@@ -39,6 +39,30 @@ npx sequelize-cli model:generate --name Denomination --attributes name:string
 npx sequelize-cli model:generate --name DenominationCashCutOff --attributes cantidad:integer,CashCutOffId:integer,DenominationId:integer 
 
 
+// SEQUELIZE Model: Charges
+npx sequelize-cli model:generate --name Charge --attributes name:string,amount:double
+
+// SEQUELIZE Model: Branch
+npx sequelize-cli model:generate --name Branch --attributes name:string,address:string,ceo:string,description:string,security:string
+
+// SEQUELIZE Model: Client
+npx sequelize-cli model:generate --name Client --attributes name:string,lastName:string,gender:integer,intNumber:string,extNumber:string,suburb:string,zipcode:string,city:string,state:string,phone:string,curp:string,rfc:string,ine:string,email:string,active:boolean,BranchId:integer,EmployeeId:integer
+
+// SEQUELIZE Model: Account
+npx sequelize-cli model:generate --name Account --attributes type:string,dateCreate:date,amount:double,state:boolean,ClientId:integer
+
+// SEQUELIZE Model: Beneficiary
+npx sequelize-cli model:generate --name Beneficiary --attributes relation:string,porcentage:string,birthDate:date,phone:string,email:string,AccountId:integer
+
+// SEQUELIZE Model: Card
+npx sequelize-cli model:generate --name Card --attributes cardNumber:string,nip:integer,dateExpiration:date,state:boolean,AccountId:integer
+
+// SEQUELIZE Model: Replacement
+npx sequelize-cli model:generate --name Replacement --attributes date:date,CardId:integer
+
+// SEQUELIZE Model: Transaction
+npx sequelize-cli model:generate --name Transaction --attributes initialAmount:double,endAmount:double,date:date,type:string,amount:double,EmployeeId:integer,CashBoxId:integer,AccountId:integer,ChargeId:integer
+
 // SEQUELIZE Model: ######
 npx sequelize-cli model:generate --name 
 
