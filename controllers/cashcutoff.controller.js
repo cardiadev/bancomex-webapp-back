@@ -74,7 +74,7 @@ const deleteOne = async (req, res) => {
       msg: `${nameModel} was deleted successfully`,
     });
   } catch (error) {
-    res.status(404).send({ success: false, msg: `${nameModel} wasn't delete` });
+    res.status(404).send({ success: false, msg: `${nameModel} wasn't deleted` });
   }
 };
 
