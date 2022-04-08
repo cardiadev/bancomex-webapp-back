@@ -26,6 +26,19 @@ npx sequelize-cli model:generate --name BusinessUnit --attributes name:string
 // SEQUELIZE Model: Employee
 npx sequelize-cli model:generate --name Employee --attributes firstName:string,lastName:string,code:string,password:string,status:string,role:string,businessUnitId:integer
 
+// SEQUELIZE Model: CashBox
+npx sequelize-cli model:generate --name CashBox --attributes name:string,status:boolean 
+
+// SEQUELIZE Model: CashCutOff
+npx sequelize-cli model:generate --name CashCutOff --attributes totalStart:decimal,totalEnd:decimal,differemces:decimal,date:date,CashBoxId:integer,EmployeeId:integer
+
+// SEQUELIZE Model: Denomination
+npx sequelize-cli model:generate --name Denomination --attributes name:string
+
+// SEQUELIZE Model: DenominationCashCutOff
+npx sequelize-cli model:generate --name DenominationCashCutOff --attributes cantidad:integer,CashCutOffId:integer,DenominationId:integer 
+
+
 // SEQUELIZE Model: ######
 npx sequelize-cli model:generate --name 
 
