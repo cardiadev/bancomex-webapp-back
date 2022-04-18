@@ -18,6 +18,8 @@ const cashboxesRoutes = require('./routes/cashboxes.routes');
 const chargesRoutes = require('./routes/charges.routes');
 const branchRoutes = require('./routes/branch.routes');
 const denominationcashRoutes = require('./routes/denominationcash.routes');
+const cardsRoutes = require ('./routes/cards.routes');
+const guaranteesRouter = require('./routes/gurantees.routes');
 
 
 //USE ROUTES
@@ -29,6 +31,8 @@ app.use( pathApi, cashboxesRoutes);
 app.use( pathApi, chargesRoutes);
 app.use( pathApi, branchRoutes);
 app.use( pathApi, denominationcashRoutes);
+app.use(pathApi,cardsRoutes);
+app.use (pathApi, guaranteesRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server UP corriendo en http://localhost:${process.env.PORT}`);
