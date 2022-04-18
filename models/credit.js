@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Credit.belongsTo(models.Cliente);
+      Credit.belongsTo(models.Client);
       Credit.belongsTo(models.Employee);
       Credit.hasMany(models.Guarantee);
     }
