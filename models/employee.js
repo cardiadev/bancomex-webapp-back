@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Employee.belongsTo(models.BusinessUnit)
       Employee.hasMany(models.CashCutOff);
+      Employee.hasMany(models.Client);
+      Employee.hasMany(models.Transaction);
+      Employee.hasMany(models.Credit);
     }
   }
   Employee.init({
