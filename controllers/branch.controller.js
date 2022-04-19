@@ -32,7 +32,7 @@ const findAll = async (req, res) => {
      try{
          const result = await Model.create({ ...req.body });
          res
-            .status(201)
+            .status(20)
             .send({succes: true, result, msg: `${nameModel} was created succesfully`});
      } catch(error){
          res
@@ -62,7 +62,7 @@ const findAll = async (req, res) => {
          const result = await Model.destroy({ where: { id } });
          res
             .status(200)
-            .send({ succes: true ,result, msg:`${nameModele} was deleted succesfully`})
+            .send({ succes: true ,result, msg:`${nameModele} was deleted succesfully`});
      }catch(error){
          res
             .status(404)
