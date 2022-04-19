@@ -22,3 +22,4 @@ module.exports = {
   "dialect": process.env.PROD_DB_DIALECT
 }
 };
+

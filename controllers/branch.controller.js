@@ -31,9 +31,9 @@ const findAll = async (req, res) => {
  const create = async (req, res) =>{
      try{
          const result = await Model.create({ ...req.body });
-         res.status(201)
-            .send({succes: true, result, msg: `${nameModel} was created succesfully`,
-            });
+         res
+            .status(201)
+            .send({succes: true, result, msg: `${nameModel} was created succesfully`});
      } catch(error){
          res
             .status(400)
@@ -47,7 +47,7 @@ const findAll = async (req, res) => {
          const result = await Model.update({ ...req.body}, { where: { id } });
          res
             .status(200)
-            .send({scces: true, result, msg: `${nameModel} was update succesfully`,  
+            .send({succes: true, result, msg: `${nameModel} was update succesfully`,  
             });
      }catch (error){
          res
