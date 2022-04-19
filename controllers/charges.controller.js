@@ -14,11 +14,11 @@ const findAll = async (req,res) => {
         .send({ succes: true, result, msg: `${nameModel} found All`});
 };
 
-//Endpoint: findByPk
+//Endpoint: findById
 
 const findOne = async (req,res) => {
     const { id } = req.params;
-    const result = await Model.findByPk(id);
+    const result = await Model.findAll(id);
     if(!result)
     return res
         .status(404)
