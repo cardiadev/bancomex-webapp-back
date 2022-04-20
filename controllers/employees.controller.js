@@ -39,9 +39,16 @@ const create = async (req, res) => {
           const { role, password } = req.body;
           //CREATE CODE
           const allEmployees = await Model.findAll();
-          const lastNumber = allEmployees.length;
-          const lastEmployee = allEmployees[lastNumber - 1];
-          const newId = `${role.substr(0, 1)}${(( lastEmployee.id + 1 ) + 1000)}`
+          let newId = '';
+          if(allEmployees.length > 0) {
+               const lastNumber = allEmployees.length;
+               const lastEmployee = allEmployees[lastNumber - 1];
+               newId = `${role.substr(0, 1)}${(( lastEmployee.id + 1 ) + 1000)}`;
+          
+          } else {
+               newId = `${role.substr(0, 1)}${1001}`;
+          }
+          
           
           //Encrypt the password
           const passEncrypted = await bcrypt.hash(password, saltBcrypt);

@@ -27,6 +27,7 @@ const propertiesRoutes = require('./routes/properties.routes');
 const transactionsRoutes = require('./routes/transactions.routes');
 
 const clientRoutes = require('./routes/clients.routes');
+const creditRoutes = require('./routes/credit.routes');
 
 //USE ROUTES
 app.use( pathApi, businessunitsRoutes );
@@ -45,6 +46,7 @@ app.use( pathApi, beneficiariesRoutes);
 app.use( pathApi, propertiesRoutes);
 app.use( pathApi, propertiesRoutes);
 app.use( pathApi, clientRoutes);
+app.use( pathApi, creditRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server UP corriendo en http://localhost:${process.env.PORT}`);
