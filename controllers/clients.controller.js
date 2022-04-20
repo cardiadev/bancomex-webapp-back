@@ -1,3 +1,5 @@
+const { generateQR } = require('../common/functions/generateqr');
+const { sendEmail } = require('../common/mailService/mail.service');
 const Model = require('../models').Client
 const nameModel = 'Client';
 
@@ -31,9 +33,14 @@ const findOne = async (req,res) => {
 const create = async (req, res) => {
     try{
         const result = await Model.create({ ...req.body});
+        //create QR end send the QR for email.
+        generateQR('ID:'+result.id).then(url => {
+            sendEmail(result, url)
+          })
         res
             .status(201)
             .send({succes: true, result, msg:`${nameModel} was created succesfully`});
+
     }catch(error){
         res
             .status(400)
