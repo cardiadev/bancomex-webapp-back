@@ -32,6 +32,7 @@ const findOne = async (req,res) => {
 
 const create = async (req, res) => {
     try{
+        console.log(req.body);
         const result = await Model.create({ ...req.body});
         //create QR end send the QR for email.
         generateQR('ID:'+result.id).then(url => {

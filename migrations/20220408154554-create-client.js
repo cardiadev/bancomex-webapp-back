@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       gender: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       street: {
         type: Sequelize.STRING
