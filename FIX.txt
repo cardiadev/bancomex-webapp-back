@@ -12,3 +12,11 @@ ACTUAL:     differemces
 FIX:        differences
 
 ////////////////////////////////////////////////////////////////
+
+NAME : Falta campo pais en modelo y la migracion de "Cliente"
+
+WHAT:      Campo de "Pais" de Cliente
+ACTUAL:     No existe
+FIX:        Crearlos en las migraciones y modelo
+
+////////////////////////////////////////////////////////////////

@@ -32,12 +32,12 @@ const findAll = async (req, res) => {
      try{
          const result = await Model.create({ ...req.body });
          res
-            .status(20)
+            .status(200)
             .send({succes: true, result, msg: `${nameModel} was created succesfully`});
      } catch(error){
          res
             .status(400)
-            .send({ succes: false, msg: `${nameModel} wasn't created`}, error);
+            .send({ succes: false, msg: `${nameModel} wasn't created`, error});
      }
  };
 
