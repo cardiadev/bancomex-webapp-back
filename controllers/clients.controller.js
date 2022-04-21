@@ -32,6 +32,12 @@ const findOne = async (req,res) => {
 
 const create = async (req, res) => {
     try{
+
+        if (req.user.role !== 'Ejecutivo' || req.use.role !== 'Gerente') 
+            return res.status(401).json({ msg: 'Denied Role Access' })
+            
+        req.body.EmployeeId = req.user.id;
+
         const result = await Model.create({ ...req.body});
         //create QR end send the QR for email.
         generateQR('ID:'+result.id).then(url => {

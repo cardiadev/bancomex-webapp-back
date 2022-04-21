@@ -33,6 +33,12 @@ const findOne = async (req, res) => {
 //  Endpoint: create
 const create = async (req, res) => {
   try {
+    
+    if (req.user.role !== 'Cajero') 
+            return res.status(401).json({ msg: 'Denied Role Access' })
+            
+    req.body.EmployeeId = req.user.id;
+
     const result = await Model.create({ ...req.body });
     res.status(201).send({
       success: true,

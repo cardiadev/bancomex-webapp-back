@@ -29,6 +29,7 @@ const findByPk = async (req, res) => {
 //  Endpoint: create
 const create = async (req, res) => {
     try {
+      req.body.EmployeeId = req.user.id;
       const result = await Model.create({ ...req.body });
       res.status(201).send({
         success: true,

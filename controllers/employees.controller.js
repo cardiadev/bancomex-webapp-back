@@ -7,6 +7,7 @@ const { createToken } = require('../common/functions/authorization');
 
 const findAll = async (req, res) => {
      const result = await Model.findAll();
+     console.log(req.user)
      if (!result)
        return res
          .status(404)
@@ -88,7 +89,7 @@ const login = async (req, res) => {
           return res.status(404).send({success: false, msg: `Credentials are incorrect`});
 
      //SEND USER AND TOKEN
-     const token = await createToken( employeeCorrect.id, employee.role, true );
+     const token = await createToken( employee[0].id, employee[0].role, true );
 
      res.status(200).send({success: true, result: employee ,msg: `${nameModel} found`, token})
 }

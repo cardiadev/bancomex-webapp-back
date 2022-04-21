@@ -1,16 +1,18 @@
 const jwt = require('jsonwebtoken');
-const credential = '@GTSK123SO98*/@25-SD243Q'
+require('dotenv').config();
+const express = require('express')
+const authorization = express.Router(); 
 
-const createToken =  async ( userId = '', role = '', access = true ) => {
+const createToken =  async ( userId = 0, role = '', access = true ) => {
 
      try {
           const token = jwt.sign(
                {
-                   _id: userId,
+                   id: userId,
                    role,
                    access
                },
-               credential,
+               process.env.SIGN_TOKEN,
                { expiresIn: '1hr'}
            );
        
@@ -21,6 +23,19 @@ const createToken =  async ( userId = '', role = '', access = true ) => {
     
 }
 
+const verifyToken = (req, res, next) => {
+     const token = req.header('authorization')
+     if (!token) return res.status(401).json({ msg: 'Denied Access' })
+     try {
+         const verified = jwt.verify(token, process.env.SIGN_TOKEN)
+         req.user = verified
+         next() // continuamos
+     } catch (error) {
+         res.status(400).json({msg: 'token is invalid'})
+     }
+}
+
 module.exports = {
-     createToken
+     createToken,
+     verifyToken
 }
