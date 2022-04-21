@@ -38,7 +38,10 @@ const create = async (req, res) => {
             return res.status(401).json({ msg: 'Denied Role Access' })
             
     req.body.EmployeeId = req.user.id;
-
+    const date = new Date();
+    req.body.date = date.toISOString(); 
+    console.log(req.body.date)
+    
     const result = await Model.create({ ...req.body });
     res.status(201).send({
       success: true,

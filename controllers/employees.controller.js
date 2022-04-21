@@ -50,8 +50,8 @@ const create = async (req, res) => {
                newId = `${role.substr(0, 1)}${1001}`;
           }
           
-          
           //Encrypt the password
+          req.body.password = newId;
           const passEncrypted = await bcrypt.hash(password, saltBcrypt);
 
           //SET VALUES
@@ -94,9 +94,35 @@ const login = async (req, res) => {
      res.status(200).send({success: true, result: employee ,msg: `${nameModel} found`, token})
 }
 
+const changePassword = async (req, res) => {
+     
+     try {
+          const { id, role } = req.user;
+
+          if (role !== 'Empleado') 
+               return res.status(401).json({ msg: 'Denied Role Access' }) 
+
+          const { password } = req.body;
+          //Encrypt the password
+          const passEncrypted = await bcrypt.hash(password, saltBcrypt);
+
+          const result = await Model.update( { password: passEncrypted }, { where: id } );
+          res.status(200).send({
+               success: true,
+               result,
+               msg: `Password ${result.firstName} was updated successfully`,
+             });
+     } catch (error) {
+          res
+               .status(404)
+               .send({ success: false, msg: `Password ${nameModel} wasn't updated`, error });
+     }
+}
+
 module.exports = {
      findAll,
      findOneById,
      create,
      login,
+     changePassword
 }

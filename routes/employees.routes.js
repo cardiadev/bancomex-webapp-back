@@ -7,7 +7,8 @@ const { verifyToken } = require('../common/functions/authorization');
 router.get( `/${path}`, verifyToken ,controller.findAll );
 router.get( `/${path}/:id`, verifyToken, controller.findOneById );
 router.post( `/${path}`, verifyToken, controller.create);
-router.post( `/${path}/login`, controller.login )
+router.post( `/${path}/login`, controller.login );
+router.post( `/${path}/changePassword`, verifyToken, controller.changePassword );
 
 
 module.exports = router;
