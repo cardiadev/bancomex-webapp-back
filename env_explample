@@ -24,3 +24,4 @@ DEV_MAIL_HOST = "smtp.gmail.com"
 DEV_MAIL_PORT = 465
 DEV_MAIL_AUTH_USER = "email@email.com"
 DEV_MAIL_AUTH_PASSWORD = "email_password"
+SIGN_TOKEN = '#######'
