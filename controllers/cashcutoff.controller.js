@@ -1,4 +1,6 @@
 const Model = require("../models").CashCutOff;
+const CashBox = require("../models").CashBox;
+const Employee = require("../models").Employee;
 const nameModel = "Cash Cut Off";
 
 //  Endpoint: findAll
@@ -87,10 +89,31 @@ const deleteOne = async (req, res) => {
   }
 };
 
+const getAllInfoOf = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id)
+    const result = await Model.findOne( {
+      where: { id },
+      include: [{
+        model: CashBox
+      }, {
+        model: Employee
+      }]
+    } )
+
+    res.status(200).send({result});
+
+  } catch (error) {
+      res.status(404).send({ success: false, msg: `${nameModel} wasn't found`, error });
+  }
+}
+
 module.exports = {
   findAll,
   findOne,
   create,
   update,
   deleteOne,
+  getAllInfoOf
 };

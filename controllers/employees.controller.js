@@ -37,7 +37,7 @@ const findOneById = async (req, res) => {
 
 const create = async (req, res) => {
      try {
-          const { role, password } = req.body;
+          const { role } = req.body;
           //CREATE CODE
           const allEmployees = await Model.findAll();
           let newId = '';
@@ -52,7 +52,7 @@ const create = async (req, res) => {
           
           //Encrypt the password
           req.body.password = newId;
-          const passEncrypted = await bcrypt.hash(password, saltBcrypt);
+          const passEncrypted = await bcrypt.hash( req.body.password, saltBcrypt);
 
           //SET VALUES
           req.body.code = newId;

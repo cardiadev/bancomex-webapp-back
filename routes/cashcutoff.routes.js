@@ -8,6 +8,7 @@ const { verifyToken } = require('../common/functions/authorization');
 
 // Route: findOne
 router.get(`/${path}/:id`, verifyToken, controller.findOne)
+router.get(`/${path}/getAllInfo/:id`, controller.getAllInfoOf)
 // Route: findAll
 router.get(`/${path}`, verifyToken, controller.findAll)
 // Route: create
