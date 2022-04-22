@@ -1,4 +1,5 @@
 const Model = require("../models").Account
+const ModelClient = require("../models").Client
 const nameModel = "Accounts"
 
 //  Endpoint: findAll
@@ -37,10 +38,65 @@ const create = async (req, res) => {
       });
     } catch (error) {
       res
-        .status(400)
+        .status(404)
         .send({ success: false, msg: `${nameModel} wasn't created` }, error);
     }
   };
+
+// Endpoint: findByClientId
+const findByClientId = async (req, res) => {
+  try{
+    const {id} = req.params
+    const result = await Model.findOne({
+      where: {
+       id:parseInt(id),
+       //state: true,       
+      },
+      include:{
+        model: ModelClient
+      }
+    });
+
+    if(result){
+      res
+        .status(200)
+        .send({success: true, result, msg: `${nameModel} found`})
+    }else{
+      throw new Error(`${nameModel} not found`)
+    }
+
+  }catch(error){
+    return res
+      .status(404)
+      .send({success: false, msg: error });
+  }
+}
+
+// Endpoint: deposit
+const deposit = async (req, res) => {
+  try{
+    const {id, amountDeposit} = req.body
+
+      const deposit = await Model.increment({amount: amountDeposit},{
+        where: {
+          id:parseInt(id),
+          state: true
+        }
+      });
+      if(!deposit){   
+        throw new Error(`${nameModel} not increment`)
+      }else{
+        res
+        .status(200)
+        .send({success: true, deposit, msg: `${nameModel} increment`})
+      }
+
+   }catch(error){
+    return res
+      .status(404)
+      .send({success: false, msg: error });
+   }
+}
 
 // Endpoint: update
 const update = async (req, res) => {
@@ -63,5 +119,7 @@ const update = async (req, res) => {
     findAll,
     findByPk,
     create,
-    update
+    update,
+    deposit,
+    findByClientId
   }; 
