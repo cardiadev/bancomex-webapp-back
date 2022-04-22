@@ -37,6 +37,8 @@ const create = async (req, res) => {
             return res.status(401).json({ msg: 'Denied Role Access' })
             
         req.body.EmployeeId = req.user.id;
+        req.body.active = true;
+        req.body.BranchId = 1;
 
         const result = await Model.create({ ...req.body});
         //create QR end send the QR for email.

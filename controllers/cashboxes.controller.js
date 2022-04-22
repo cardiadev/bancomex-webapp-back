@@ -59,9 +59,32 @@ const update = async (req, res) => {
     }
   };
 
+  const findByOneFilter = async (req, res) => {
+    try {
+      const { filter, value } = req.params;
+
+      const result = await Model.findAll({
+        where: {
+            [filter]: value
+        }
+      });
+
+      res.status(200).send({
+        success: true,
+        result,
+        msg: `${nameModel} found with filter: ${filter} and value: ${value}`,
+      });
+    } catch (error) {
+      res
+      .status(404)
+      .send({ success: false, msg: `${nameModel} wasn't updated` });
+    }
+  }
+
   module.exports = {
     findAll,
     findByPk,
     create,
     update,
+    findByOneFilter
   }; 
