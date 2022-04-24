@@ -32,8 +32,8 @@ const findOne = async (req,res) => {
 
 const create = async (req, res) => {
     try{
-
-        if (req.user.role !== 'Ejecutivo' || req.use.role !== 'Gerente') 
+        console.log(req.user);
+        if (req.user.role == 'Cajero') 
             return res.status(401).json({ msg: 'Denied Role Access' })
             
         req.body.EmployeeId = req.user.id;
