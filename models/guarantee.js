@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Guarantee.init({
-    name: DataTypes.STRING,
+    firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     address: DataTypes.STRING,
     phone: DataTypes.STRING,
-    CreditId: DataTypes.INTEGER
+    creditId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Guarantee',

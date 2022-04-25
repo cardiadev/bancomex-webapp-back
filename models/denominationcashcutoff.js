@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   DenominationCashCutOff.init({
-    cantidad: DataTypes.INTEGER,
-    CashCutOffId: DataTypes.INTEGER,
-    DenominationId: DataTypes.INTEGER
+    amount: DataTypes.INTEGER,
+    cashCutOffId: DataTypes.INTEGER,
+    denominationId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'DenominationCashCutOff',

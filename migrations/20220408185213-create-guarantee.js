@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      firstName: {
         type: Sequelize.STRING
       },
       lastName: {
@@ -20,7 +20,7 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      CreditId: {
+      creditId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Credits',

@@ -12,12 +12,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       newCardNumber: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       reason: {
         type: Sequelize.STRING
       },
-      CardId: {
+      cardId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Cards',

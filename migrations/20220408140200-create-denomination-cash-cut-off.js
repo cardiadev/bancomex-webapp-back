@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cantidad: {
+      amount: {
         type: Sequelize.INTEGER
       },
-      CashCutOffId: {
+      cashCutOffId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashCutOffs',
@@ -20,7 +20,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      DenominationId: {
+      denominationId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Denominations',

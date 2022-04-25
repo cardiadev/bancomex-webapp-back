@@ -14,13 +14,13 @@ module.exports = {
       totalEnd: {
         type: Sequelize.DECIMAL
       },
-      differemces: {
+      differences: {
         type: Sequelize.DECIMAL
       },
       date: {
         type: Sequelize.DATE
       },
-      CashBoxId: {
+      cashBoxId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashBoxes',
@@ -29,7 +29,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      EmployeeId: {
+      employeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',

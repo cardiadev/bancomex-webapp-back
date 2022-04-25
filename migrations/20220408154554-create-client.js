@@ -56,7 +56,7 @@ module.exports = {
       active: {
         type: Sequelize.BOOLEAN
       },
-      BranchId: {
+      branchId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Branches',
@@ -65,7 +65,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      EmployeeId: {
+      employeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',

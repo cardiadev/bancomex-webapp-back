@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Replacement.init({
     date: DataTypes.DATE,
-    newCardNumber: DataTypes.INTEGER,
+    newCardNumber: DataTypes.BIGINT,
     reason: DataTypes.STRING,
-    CardId: DataTypes.INTEGER
+    cardId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Replacement',

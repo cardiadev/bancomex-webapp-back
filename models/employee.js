@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.ENUM({
       values: ['Cajero', 'Ejecutivo', 'Gerente']
     }),
-    BusinessUnitId: DataTypes.INTEGER
+    businessUnitId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Employee',

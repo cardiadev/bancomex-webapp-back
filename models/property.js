@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Property.init({
     file: DataTypes.STRING,
     value: DataTypes.STRING,
-    GuaranteeId: DataTypes.INTEGER
+    guaranteeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Property',

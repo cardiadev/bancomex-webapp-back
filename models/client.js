@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     ine: DataTypes.STRING,
     email: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
-    BranchId: DataTypes.INTEGER,
-    EmployeeId: DataTypes.INTEGER
+    branchId: DataTypes.INTEGER,
+    employeeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Client',

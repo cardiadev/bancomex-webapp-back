@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cardNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT
       },
       nip: {
         type: Sequelize.INTEGER
@@ -20,7 +20,7 @@ module.exports = {
       state: {
         type: Sequelize.BOOLEAN
       },
-      AccountId: {
+      accountId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Accounts',
