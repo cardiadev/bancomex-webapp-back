@@ -12,7 +12,6 @@ app.use(cors());
 //ROUTES
 const businessunitsRoutes = require("./routes/businessunits.routes");
 const employeesRoutes = require("./routes/employees.routes");
-const denominationsRoutes = require("./routes/denominations.routes");
 const casscutoffRoutes = require("./routes/cashcutoff.routes");
 const cashboxesRoutes = require("./routes/cashboxes.routes");
 const chargesRoutes = require("./routes/charges.routes");
@@ -31,7 +30,6 @@ const creditRoutes = require("./routes/credit.routes");
 //USE ROUTES
 app.use(pathApi, businessunitsRoutes);
 app.use(pathApi, employeesRoutes);
-app.use(pathApi, denominationsRoutes);
 app.use(pathApi, casscutoffRoutes);
 app.use(pathApi, cashboxesRoutes);
 app.use(pathApi, chargesRoutes);

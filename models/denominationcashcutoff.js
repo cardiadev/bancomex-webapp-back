@@ -11,14 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      DenominationCashCutOff.belongsTo(models.Denomination);
+      //DenominationCashCutOff.belongsTo(models.Denomination);
       DenominationCashCutOff.belongsTo(models.CashCutOff);
     }
   }
   DenominationCashCutOff.init({
-    amount: DataTypes.INTEGER,
-    cashCutOffId: DataTypes.INTEGER,
-    denominationId: DataTypes.INTEGER
+    cantidad: DataTypes.INTEGER,
+    denomination: DataTypes.ENUM({
+      values: ['B1000', 'B500', 'B200', 'B100', 'B50','B20','M10','M5','M2','M1', 'M50C']
+    }),
+    CashCutOffId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'DenominationCashCutOff',
