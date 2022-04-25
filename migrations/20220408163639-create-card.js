@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cardNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT
       },
       nip: {
         type: Sequelize.INTEGER

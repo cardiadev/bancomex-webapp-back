@@ -13,7 +13,7 @@ const createToken =  async ( userId = 0, role = '', access = true ) => {
                    access
                },
                process.env.SIGN_TOKEN,
-               { expiresIn: '1hr'}
+               { expiresIn: '1d'}
            );
        
            return token; 

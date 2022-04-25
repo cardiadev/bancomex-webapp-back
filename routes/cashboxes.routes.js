@@ -9,6 +9,8 @@ const { verifyToken } = require('../common/functions/authorization');
 router.get(`/${path}/:id`, verifyToken, controller.findByPk)
 // Route: findAll
 router.get(`/${path}`, verifyToken, controller.findAll)
+router.get(`/${path}/byFilter/:filter/:value`, controller.findByOneFilter)
+
 // Route: create
 router.post(`/${path}`, verifyToken, controller.create)
 // Route: update

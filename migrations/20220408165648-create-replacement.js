@@ -11,6 +11,12 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
+      newCardNumber: {
+        type: Sequelize.BIGINT
+      },
+      reason: {
+        type: Sequelize.STRING
+      },
       CardId: {
         type: Sequelize.INTEGER,
         references: {
