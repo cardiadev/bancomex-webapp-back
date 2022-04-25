@@ -7,22 +7,22 @@ module.exports = {
       [
         {
           amount: 25,
-          cashCutOffId:1,
-          denominationId:1,
+          denomination:"B500",
+          cashCutOffId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           amount: 134,
-          cashCutOffId:1,
-          denominationId:2,
+          denomination:"B200",
+          cashCutOffId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           amount: 56,
-          cashCutOffId:1,
-          denominationId:3,
+          denomination:"B100",
+          cashCutOffId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

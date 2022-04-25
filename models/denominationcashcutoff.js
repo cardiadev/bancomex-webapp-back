@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     denomination: DataTypes.ENUM({
       values: ['B1000', 'B500', 'B200', 'B100', 'B50','B20','M10','M5','M2','M1', 'M50C']
     }),
-    CashCutOffId: DataTypes.INTEGER,
+    cashCutOffId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'DenominationCashCutOff',
