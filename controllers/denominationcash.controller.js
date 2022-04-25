@@ -30,13 +30,15 @@ const findOne = async (req, res) => {
 
 const create = async (req, res) => {
     try{
+        console.log(req.body)
         const result = await Model.create({ ...req.body });
         res.status(201)
             .send({succes: true, result, msg: `${nameModel} was created succesfully`})
     }catch(error){
+        console.log(error)
         res
             .status(400)
-            .send({succes: false, msg: `${nameModel} wasn't created`}, error)
+            .send({succes: false, msg: `${nameModel} wasn't created`, error})
     }
 };
 
