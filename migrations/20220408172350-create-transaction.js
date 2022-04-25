@@ -23,7 +23,7 @@ module.exports = {
       amount: {
         type: Sequelize.DOUBLE
       },
-      employeeId: {
+      EmployeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',
@@ -32,7 +32,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      cashBoxId: {
+      CashBoxId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashBoxes',
@@ -41,7 +41,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      accountId: {
+      AccountId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Accounts',
@@ -50,7 +50,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      chargeId: {
+      ChargeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Charges',

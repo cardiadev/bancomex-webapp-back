@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     newCardNumber: DataTypes.BIGINT,
     reason: DataTypes.STRING,
-    cardId: DataTypes.INTEGER
+    CardId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Replacement',

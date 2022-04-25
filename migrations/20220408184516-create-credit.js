@@ -32,7 +32,7 @@ module.exports = {
       commission: {
         type: Sequelize.DOUBLE
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Clients',
@@ -41,7 +41,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      employeeId: {
+      EmployeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',

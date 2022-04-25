@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     dateCreate: DataTypes.DATE,
     amount: DataTypes.DOUBLE,
     state: DataTypes.BOOLEAN,
-    clientId: DataTypes.INTEGER
+    ClientId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Account',

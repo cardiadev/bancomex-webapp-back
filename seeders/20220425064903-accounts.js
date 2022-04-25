@@ -10,7 +10,7 @@ module.exports = {
           dateCreate: new Date(),
           amount: 36721405057,
           state: true,
-          clientId: 1,
+          ClientId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -19,7 +19,7 @@ module.exports = {
           dateCreate: new Date(),
           amount: 59084760819,
           state: true,
-          clientId: 2,
+          ClientId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         }

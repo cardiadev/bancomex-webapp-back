@@ -17,7 +17,7 @@ module.exports = {
       reason: {
         type: Sequelize.STRING
       },
-      cardId: {
+      CardId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Cards',

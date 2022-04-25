@@ -8,14 +8,14 @@ module.exports = {
         {
           file: "Escrituras casa",
           value: "Valor de la propiedad",
-          guaranteeId: 1,
+          GuaranteeId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           file: "Escrituras del auto",
           value: "Valor de la propiedad",
-          guaranteeId: 1,
+          GuaranteeId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     totalEnd: DataTypes.DECIMAL,
     differences: DataTypes.DECIMAL,
     date: DataTypes.DATE,
-    cashBoxId: DataTypes.INTEGER,
-    employeeId: DataTypes.INTEGER
+    CashBoxId: DataTypes.INTEGER,
+    EmployeeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'CashCutOff',

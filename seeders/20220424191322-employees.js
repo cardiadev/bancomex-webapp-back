@@ -4,8 +4,8 @@ const saltBcrypt = 10;
 
 let empleados = [
   {code: "E1001"},
-  {code: "C1001"},
-  {code: "G1001"}
+  {code: "C1002"},
+  {code: "G1003"}
 ];
 
 async function passEncrypted(empleado){
@@ -26,7 +26,7 @@ module.exports = {
           password: await passEncrypted(empleados[0].code),
           status: true,
           role: "Ejecutivo",
-          businessUnitId: 1,
+          BusinessUnitId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -37,7 +37,7 @@ module.exports = {
           password: await passEncrypted(empleados[0].code),
           status: true,
           role: "Ejecutivo",
-          businessUnitId: 1,
+          BusinessUnitId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -48,7 +48,7 @@ module.exports = {
           password: await passEncrypted(empleados[0].code),
           status: true,
           role: "Ejecutivo",
-          businessUnitId: 1,
+          BusinessUnitId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

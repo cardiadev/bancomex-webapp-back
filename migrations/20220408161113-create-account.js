@@ -20,7 +20,7 @@ module.exports = {
       state: {
         type: Sequelize.BOOLEAN
       },
-      clientId: {
+      ClientId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Clients',

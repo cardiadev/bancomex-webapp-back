@@ -16,7 +16,7 @@ module.exports = {
           values: ['B1000', 'B500', 'B200', 'B100', 'B50','B20','M10','M5','M2','M1', 'M50C']
         })
       },
-      cashCutOffId: {
+      CashCutOffId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashCutOffs',

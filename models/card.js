@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     nip: DataTypes.INTEGER,
     dateExpiration: DataTypes.DATE,
     state: DataTypes.BOOLEAN,
-    accountId: DataTypes.INTEGER
+    AccountId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Card',

@@ -23,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     type: DataTypes.STRING,
     amount: DataTypes.DOUBLE,
-    employeeId: DataTypes.INTEGER,
-    cashBoxId: DataTypes.INTEGER,
-    accountId: DataTypes.INTEGER,
-    chargeId: DataTypes.INTEGER
+    EmployeeId: DataTypes.INTEGER,
+    CashBoxId: DataTypes.INTEGER,
+    AccountId: DataTypes.INTEGER,
+    ChargeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Transaction',

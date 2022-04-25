@@ -20,7 +20,7 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
-      cashBoxId: {
+      CashBoxId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashBoxes',
@@ -29,7 +29,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      employeeId: {
+      EmployeeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Employees',

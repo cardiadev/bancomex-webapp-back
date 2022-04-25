@@ -14,7 +14,7 @@ module.exports = {
       value: {
         type: Sequelize.STRING
       },
-      guaranteeId: {
+      GuaranteeId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Guarantees',

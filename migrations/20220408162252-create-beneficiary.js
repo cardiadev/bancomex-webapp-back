@@ -29,7 +29,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      accountId: {
+      AccountId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Accounts',

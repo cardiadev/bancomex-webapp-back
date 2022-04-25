@@ -20,7 +20,7 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      creditId: {
+      CreditId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Credits',

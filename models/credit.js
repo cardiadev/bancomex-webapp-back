@@ -25,8 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     debTerm: DataTypes.INTEGER,
     interest: DataTypes.DOUBLE,
     commission: DataTypes.DOUBLE,
-    clientId: DataTypes.INTEGER,
-    employeeId: DataTypes.INTEGER
+    ClientId: DataTypes.INTEGER,
+    EmployeeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Credit',

@@ -28,7 +28,7 @@ module.exports = {
           values: ['Cajero', 'Ejecutivo', 'Gerente']
         })
       },
-      businessUnitId: {
+      BusinessUnitId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'BusinessUnits',
