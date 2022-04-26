@@ -17,6 +17,10 @@ router.post(`/${path}`, verifyToken, controller.create)
 router.put(`/${path}/:id`, verifyToken, controller.update)
 //Route: Count Accounts
 router.get(`/${path}/countAccounts`, verifyToken, controller.countAccounts)
+// Route: deposit
+router.post(`/${path}/deposit`, verifyToken, controller.deposit)
+// Route: findByIdClient
+router.get(`/${path}/byClient/:id`, verifyToken, controller.findByClientId)
 
 
 module.exports = router;

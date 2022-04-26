@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Beneficiary.init({
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
     relation: DataTypes.STRING,
     porcentage: DataTypes.STRING,
     birthDate: DataTypes.DATE,

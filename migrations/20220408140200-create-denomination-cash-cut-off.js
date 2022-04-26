@@ -8,22 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cantidad: {
+      amount: {
         type: Sequelize.INTEGER
+      },
+      denomination: {
+        type: Sequelize.ENUM({
+          values: ['B1000', 'B500', 'B200', 'B100', 'B50','B20','M10','M5','M2','M1', 'M50C']
+        })
       },
       CashCutOffId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'CashCutOffs',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
-      },
-      DenominationId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Denominations',
           key: 'id'
         },
         onUpdate: 'CASCADE',

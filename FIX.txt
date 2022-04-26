@@ -20,3 +20,15 @@ ACTUAL:     No existe
 FIX:        Crearlos en las migraciones y modelo
 
 ////////////////////////////////////////////////////////////////
+
+
+Correcciones en denominationCashCutOff modelo y migraciones
+Correcciones en Cards en cardNumber se cambio el tipo de dato INTEGER a BIGINT en modelo y migraciones
+Correcciones en Replacements en newCardNumber se cambio el tipo de dato INTEGER a BIGINT en modelo y migraciones
+
+Notas:
+Guarantee -> Modelo y migracion cambio de "nombre" a "firstName"
+Credit  -> revisar tipo de dato en "debTerm" =  plazo de meses del credito
+Accounts -> revissar tipo de dato en "type" = Credito o Debito
+
+Seeder de cuetna de bancomex

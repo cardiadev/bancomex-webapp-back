@@ -2,6 +2,7 @@ const res = require("express/lib/response");
 const { where } = require("sequelize/types");
 
 const Model = require("../models").Account
+const ModelClient = require("../models").Client
 const nameModel = "Accounts"
 
 //  Endpoint: findAll
@@ -10,10 +11,10 @@ const findAll = async (req, res) => {
     if(!result)
     return res
         .status(404)
-        .send({succes: false, msg: `${nameModel} not found` });
+        .send({success: false, msg: `${nameModel} not found` });
     res
         .status(200)
-        .send({succes: true, result, msg: `${nameModel} found All`});
+        .send({success: true, result, msg: `${nameModel} found All`});
 }
 
 //Endpoint: findByPk
@@ -23,10 +24,10 @@ const findByPk = async (req, res) => {
     if (!result)
         return res
             .status(400)
-            .send({ succes: false, msg: `${nameModel} not found `});
+            .send({ success: false, msg: `${nameModel} not found `});
     res
         .status(200)
-        .send({ succes: true, result, msg: `${nameModel} found with ${id}` });
+        .send({ success: true, result, msg: `${nameModel} found with ${id}` });
 };
 
 //  Endpoint: create
@@ -40,10 +41,65 @@ const create = async (req, res) => {
       });
     } catch (error) {
       res
-        .status(400)
+        .status(404)
         .send({ success: false, msg: `${nameModel} wasn't created` }, error);
     }
   };
+
+// Endpoint: findByClientId
+const findByClientId = async (req, res) => {
+  try{
+    const {id} = req.params
+    const result = await Model.findOne({
+      where: {
+       id:parseInt(id),
+       //state: true,       
+      },
+      include:{
+        model: ModelClient
+      }
+    });
+
+    if(result){
+      res
+        .status(200)
+        .send({success: true, result, msg: `${nameModel} found`})
+    }else{
+      throw new Error(`${nameModel} not found`)
+    }
+
+  }catch(error){
+    return res
+      .status(404)
+      .send({success: false, msg: error });
+  }
+}
+
+// Endpoint: deposit
+const deposit = async (req, res) => {
+  try{
+    const {id, amountDeposit} = req.body
+
+      const deposit = await Model.increment({amount: amountDeposit},{
+        where: {
+          id:parseInt(id),
+          state: true
+        }
+      });
+      if(!deposit){   
+        throw new Error(`${nameModel} not increment`)
+      }else{
+        res
+        .status(200)
+        .send({success: true, deposit, msg: `${nameModel} increment`})
+      }
+
+   }catch(error){
+    return res
+      .status(404)
+      .send({success: false, msg: error });
+   }
+}
 
 // Endpoint: update
 const update = async (req, res) => {
@@ -109,5 +165,7 @@ const update = async (req, res) => {
     findByPk,
     create,
     update,
-    countAccounts
+    countAccounts,
+    deposit,
+    findByClientId
   }; 

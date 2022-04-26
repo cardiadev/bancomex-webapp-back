@@ -1,0 +1,82 @@
+"use strict";
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
+      "Clients",
+      [
+        {
+          firstName: "Bancomex",
+          lastName: "Fondo principal",
+          gender: "o",
+          street: "Av. Patria",
+          intNumber: "",
+          extNumber: 888,
+          suburb: "Col. Providencia",
+          zipcode: 48784,
+          city: "Zapopan",
+          state:"Jalisco",
+          phone: "3336359912",
+          curp: "JEPA230589HNEUHDA4",
+          rfc: "JEP230585H0",
+          ine: "",
+          email: "principal@bancomex.com",
+          active: true,
+          BranchId: 1,
+          EmployeeId:1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Alfredo Santiago",
+          lastName: "Adame Flores",
+          gender: "m",
+          street: "Rio Moctezuma",
+          intNumber: "",
+          extNumber: 335,
+          suburb: "Col. Atlas",
+          zipcode: 44875,
+          city: "Guadalajara",
+          state:"Jalisco",
+          phone: "3345218756",
+          curp: "ASAF251475HNEKMPA4",
+          rfc: "ASAF251473J1",
+          ine: "115222280",
+          email: "alfredoada@gmail.com",
+          active: true,
+          BranchId: 1,
+          EmployeeId:1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          firstName: "Sofia Abigail",
+          lastName: "Torres Martinez",
+          gender: "f",
+          street: "Educadores",
+          intNumber: "",
+          extNumber: 7485,
+          suburb: "Col. Oblatos Norte",
+          zipcode: 44721,
+          city: "Guadalajara",
+          state:"Jalisco",
+          phone: "3316487852",
+          curp: "SATM140899HNEJMCA9",
+          rfc: "SATM1408998L9",
+          ine: "112663463",
+          email: "sofiabtorres@gmail.com",
+          active: true,
+          BranchId: 1,
+          EmployeeId:1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
+  },
+
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Clients", null, {});
+  },
+};
