@@ -1,6 +1,3 @@
-const res = require("express/lib/response");
-const { where } = require("sequelize/types");
-
 const Model = require("../models").Account
 const ModelClient = require("../models").Client
 const nameModel = "Accounts"
