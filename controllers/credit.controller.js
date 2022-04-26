@@ -78,4 +78,25 @@ const deleteOne = async (req, res) => {
     }
 }
 
-module.exports = {findAll, findOne, create, update, deleteOne}
+//Count all credits
+const countCredits = async(req, res) =>{
+    try{
+        const result = await Model.count({
+            where:{
+                status:true
+            }
+        });
+        res.status(200).send({
+            succes:true,
+            result,
+            msg:`${nameModel} Total Credits found`
+        });          
+    }catch(error){
+        res
+        .status(404)
+        .send({success:false, msg:`${nameModel} wasn't found`})
+    }
+    };
+
+
+module.exports = {findAll, findOne, create, update, deleteOne, countCredits}

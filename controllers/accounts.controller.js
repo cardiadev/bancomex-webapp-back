@@ -1,3 +1,6 @@
+const res = require("express/lib/response");
+const { where } = require("sequelize/types");
+
 const Model = require("../models").Account
 const nameModel = "Accounts"
 
@@ -59,9 +62,52 @@ const update = async (req, res) => {
     }
   };
 
+  //Endpiont:Count  all Accounts
+  const countAccounts = async(req, res) => {
+    try{
+      const result = await Model.count({
+        where: {
+          status: true
+        }
+      });
+      res.status(200).send({
+        success:true,
+        result,
+        msg: `${nameModel} Total Accounts found`
+      });
+    }catch(error){
+        res
+        .status(404)
+        .send({ success: false, msg: `${nameModel} wasn't found` });
+      } 
+  };
+
+  const dineroTotalBank = async(req, res) =>{
+    try{
+      const result = await Model.findByPk({where: {
+        ClientId : 1
+      }})
+
+      res.status(200).send({
+        success:true,
+        result:result.amount,
+        msg:`${nameModel} Total Amount Bank`
+      });
+    }catch(error){
+      res
+      .status(404)
+      .send({ success: false, msg: `${nameModel} wasn't found` });
+
+
+    }
+  }
+
+
+
   module.exports = {
     findAll,
     findByPk,
     create,
-    update
+    update,
+    countAccounts
   }; 
