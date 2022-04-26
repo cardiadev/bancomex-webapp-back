@@ -6,10 +6,10 @@ const findAll = async (req, res) => {
     if (!result)
         return res
             .status(404)
-            .send({ succes: false, msg: `${nameModel} not found`});
+            .send({ success: false, msg: `${nameModel} not found`});
         res
             .status(200)
-            .send({ succes: true, result, msg: `${nameModel} found All`})
+            .send({ success: true, result, msg: `${nameModel} found All`})
 }
 
 const findOne = async (req, res) => {
@@ -22,10 +22,10 @@ const findOne = async (req, res) => {
     if (!result)
         return res
             .status(404)
-            .send({ succes: false, msg: `${nameModel} not found`});
+            .send({ success: false, msg: `${nameModel} not found`});
         res
             .status(200)
-            .send({ succes: true, result, msg: `${nameModel}found with ${id}`})
+            .send({ success: true, result, msg: `${nameModel}found with ${id}`})
 };
 
 const create = async (req, res) => {
@@ -33,12 +33,12 @@ const create = async (req, res) => {
         console.log(req.body)
         const result = await Model.create({ ...req.body });
         res.status(201)
-            .send({succes: true, result, msg: `${nameModel} was created succesfully`})
+            .send({success: true, result, msg: `${nameModel} was created succesfully`})
     }catch(error){
         console.log(error)
         res
             .status(400)
-            .send({succes: false, msg: `${nameModel} wasn't created`, error})
+            .send({success: false, msg: `${nameModel} wasn't created`, error})
     }
 };
 
@@ -52,7 +52,7 @@ const update = async(req, res) =>{
     }catch (error){
         res
             .status(404)
-            .send({ succes: false, msg:`${nameModel} wasn't update`});
+            .send({ success: false, msg:`${nameModel} wasn't update`});
     }
 };
 
@@ -62,11 +62,11 @@ const deleteOne = async (req, res) => {
         const result = await Model.destroy({ where: { id }});
         res
             .status(200)
-            .send({ succes: true, result, msg: `${nameModel} wasn deleted succesfully`});
+            .send({ success: true, result, msg: `${nameModel} wasn deleted succesfully`});
     }catch(error){
         res
             .status(404)
-            .send({ succes: false, msg:`${nameModel} wan't deleted`});
+            .send({ success: false, msg:`${nameModel} wan't deleted`});
     }
 }
 

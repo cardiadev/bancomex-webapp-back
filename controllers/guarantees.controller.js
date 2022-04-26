@@ -59,7 +59,7 @@ const update = async(req, res) =>{
         const{id} = req.params;
         const result= await Model.update({...req.body}, {where:{id}});
         res.status(200).send({
-            succes:true,
+            success:true,
             result,
             msg:`${nameModel} was updated succesfuly`,
         });

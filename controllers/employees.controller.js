@@ -76,11 +76,11 @@ const update = async(req, res) =>{
          const result = await Model.update({ ...req.body}, {where: { id } });
          res
              .status(200)
-             .send({succes: true, result, msg: `${nameModel} was update succesfully`});
+             .send({success: true, result, msg: `${nameModel} was update succesfully`});
      }catch(error){
          res
              .status(404)
-             .send({succes: false, msg: `${nameModel} wasn't update`});
+             .send({success: false, msg: `${nameModel} wasn't update`});
      }
  };
 

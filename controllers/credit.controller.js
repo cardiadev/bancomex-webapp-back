@@ -6,10 +6,10 @@ const findAll = async (req, res) => {
     if(!result)
         return res
             .status(404)
-            .send({ succes: false, msg: `${nameModel} not found`});
+            .send({ success: false, msg: `${nameModel} not found`});
         res
             .status(200)
-            .send({succes: true, result, msg: `${nameModel} found All`});
+            .send({success: true, result, msg: `${nameModel} found All`});
 }
 
 const findOne = async (req, res) => {
@@ -22,10 +22,10 @@ const findOne = async (req, res) => {
     if(!result)
         return res
             .status(404)
-            .send({ succes: false, msg: `${nameModel} not found`});
+            .send({ success: false, msg: `${nameModel} not found`});
         res
             .status(200)
-            .send({ succes: true , result, msg: `${nameModel} found with ${id}`});
+            .send({ success: true , result, msg: `${nameModel} found with ${id}`});
 }
 
 const create = async(req, res)=>{
@@ -56,11 +56,11 @@ const update = async(req, res) =>{
         const result = await Model.update({ ...req.body}, {where: { id } });
         res
             .status(200)
-            .send({succes: true, result, msg: `${nameModel} was update succesfully`});
+            .send({success: true, result, msg: `${nameModel} was update succesfully`});
     }catch(error){
         res
             .status(404)
-            .send({succes: false, msg: `${nameModel} wasn't update`});
+            .send({success: false, msg: `${nameModel} wasn't update`});
     }
 };
 
@@ -70,11 +70,11 @@ const deleteOne = async (req, res) => {
         const result = await Model.destroy({where: { id } });
         res
             .status(200)
-            .send({succes: true, result, msg: `${nameModel} was deleted succesfully`});
+            .send({success: true, result, msg: `${nameModel} was deleted succesfully`});
     }catch(error){
         res
             .status(404)
-            .send({succes: false, msg:`${nameModel} wasn't deleted`});
+            .send({success: false, msg:`${nameModel} wasn't deleted`});
     }
 }
 
