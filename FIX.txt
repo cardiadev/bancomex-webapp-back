@@ -28,5 +28,7 @@ Correcciones en Replacements en newCardNumber se cambio el tipo de dato INTEGER 
 
 Notas:
 Guarantee -> Modelo y migracion cambio de "nombre" a "firstName"
-Credit  -> revisar tipo de dato en "debTerm"
-Accounts -> revissar tipo de dato en "type"
+Credit  -> revisar tipo de dato en "debTerm" =  plazo de meses del credito
+Accounts -> revissar tipo de dato en "type" = Credito o Debito
+
+Seeder de cuetna de bancomex
