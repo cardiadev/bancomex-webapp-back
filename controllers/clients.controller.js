@@ -1,8 +1,10 @@
-const { generateQR } = require('../common/functions/generateqr');
-const { sendEmail, sendEmailWithCard } = require('../common/mailService/mail.service');
+const { generateQR } = require('../common/functions/generateqr')
+const { sendEmail, sendEmailWithCard } = require('../common/mailService/mail.service')
 const Model = require('../models').Client
 const Account = require("../models").Account
 const Card = require('../models').Card
+const Beneficiary = require('../models').Beneficiary
+
 const nameModel = 'Client';
 
 const findAll = async(req,res) => {
@@ -37,8 +39,12 @@ const create = async (req, res) => {
         if (req.user.role == 'Cajero') 
             return res.status(401).json({ msg: 'Denied Role Access' })
         
-        //verify If the client exists
-        const clientExist = await Model.findOne( { where: req.body.curp } );
+        //verify If the client exists by CURP
+        const clientExist = await Model.findOne( { 
+                                                    where: { 
+                                                        curp: req.body.client.curp 
+                                                    } 
+                                                } );
 
         if (clientExist) 
             return res.status(400).send({success: false, msg: `This ${req.body.client.curp} is already registered`});
@@ -50,14 +56,24 @@ const create = async (req, res) => {
         const result = await Model.create({ ...req.body.client });
         
         //crate account
+
         req.body.account.ClientId = result.id;
         const date = new Date();
+        //date today 
         req.body.account.dateCreate = date.toISOString();
         req.body.account.amount = 0;
         req.body.account.state = true; 
+
+        // crating account 
         const resultAc = await Account.create({ ...req.body.account });
 
         //create card
+        /* 
+            There is information for default
+            cardNumber: generate authomatically
+            nip: generet random, only 4 digits
+            dateExpiration: today + 4 years
+        */
         const cardInfo = {
             cardNumber: 0,
             nip: Math.floor(Math.random() * (9999 - 1000)) + 1000,
@@ -66,6 +82,7 @@ const create = async (req, res) => {
             AccountId: resultAc.id
         }
 
+        // generate card number
         const newCardNumber = '4125874' + 
                               (resultAc.type == 'Credito' ? '1' : '2') + 
                               ( 1000 + resultAc.id ) + 
@@ -73,8 +90,10 @@ const create = async (req, res) => {
 
         cardInfo.cardNumber = newCardNumber;
 
+        //generate date expiration
         cardInfo.dateExpiration = new Date(new Date().setFullYear(new Date().getFullYear() + 4));
 
+        // creating card
         const cardCreated = await Card.create({ ...cardInfo });
 
         //create QR end send the QR for email.
@@ -82,11 +101,21 @@ const create = async (req, res) => {
             sendEmail(result, url)
         });
 
+        //send email with the info card
         sendEmailWithCard(result, cardCreated);
+
+        //creating a beneficiary for the account
+        req.body.beneficiary.AccountId = resultAc.id;
+        const beneficiaryCreated = await Beneficiary.create( {...req.body.beneficiary} );
+        
 
         res
             .status(201)
-            .send({success: true, result: { client: result, account: resultAc, card: cardCreated }, msg:`${nameModel} was created succesfully`});
+            .send({success: true, result: { client: result, 
+                                            account: resultAc, 
+                                            card: cardCreated,
+                                            beneficiary: beneficiaryCreated 
+                                          }, msg:`${nameModel} was created succesfully`});
 
     } catch(error){
         res
