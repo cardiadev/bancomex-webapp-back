@@ -40,7 +40,7 @@ const create = async(req, res) =>{
         const result = await Model.create({...req.body});
         res.status(200).send({
             success:true,
-            resut,
+            result,
             msg:`${nameModel} was created successfully `,
 
         });
@@ -52,6 +52,22 @@ const create = async(req, res) =>{
 
 };
 
+const createMany = async( arrayGuarantees, CreditId ) => {
+    
+    let result = [];
+    try {
+        for (let i = 0; i < arrayGuarantees.length; i++) {
+            arrayGuarantees[i].CreditId = CreditId;
+            const gCreated = await Model.create( { ...arrayGuarantees[i] });
+            result = [...result, gCreated];
+        }
+
+        return result;
+    } catch (error) {
+        throw 'Error in create Many guarantees';
+    }
+    
+}
 
 //update
 const update = async(req, res) =>{
@@ -75,5 +91,6 @@ module.exports ={
     findAll,
     findOne,
     create,
-    update
+    update,
+    createMany
 }
