@@ -135,5 +135,5 @@ const update = async (req, res) => {
     deposit,
     countAccounts,
     deposit,
-    findByClientId
+    
   }; 
