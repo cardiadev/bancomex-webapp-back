@@ -9,4 +9,7 @@ router.get(`/${path}/:id`, verifyToken, controller.findOneByIb);
 router.post(`/${path}`, verifyToken, controller.create);
 router.put(`/${path}/:id`, verifyToken, controller.update);
 
+// Route: findByCardNumber
+router.get(`/${path}/byCardNumber/:cardNumber`, verifyToken, controller.findByCardNumber)
+
 module.exports = router;
