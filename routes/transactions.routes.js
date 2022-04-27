@@ -11,7 +11,7 @@ router.get(`/${path}/:id`, verifyToken, controller.findByPk)
 // Route: findAll
 router.get(`/${path}`, verifyToken, controller.findAll)
 // Route: create
-router.post(`/${path}`, verifyToken, controller.create)
+router.post(`/${path}`, verifyToken, controller.generate)
 // Route: update
 router.put(`/${path}/:id`, verifyToken, controller.update)
 

@@ -14,6 +14,14 @@ module.exports = {
       amount: {
         type: Sequelize.DOUBLE
       },
+      active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
+      type: {
+        type: Sequelize.ENUM,
+        values: ['amount', 'percentage']
+    },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

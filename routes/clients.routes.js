@@ -12,6 +12,9 @@ router.get(`/${path}/:id`, verifyToken, controller.findOne)
 //Route: FindAll
 router.get(`/${path}`, verifyToken,controller.findAll)
 
+//Route: FindAllHisAccounts
+router.get(`/${path}/:id/accounts`, verifyToken, controller.findAllHisAcounts)
+
 //Route: create
 router.post(`/${path}`, verifyToken ,controller.create)
 

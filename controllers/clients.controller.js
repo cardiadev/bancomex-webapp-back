@@ -1,6 +1,8 @@
 const { generateQR } = require('../common/functions/generateqr');
 const { sendEmail } = require('../common/mailService/mail.service');
 const Model = require('../models').Client
+const ModelAccount = require('../models').Account
+const ModelCard = require('../models').Card
 const nameModel = 'Client';
 
 const findAll = async(req,res) => {
@@ -52,7 +54,7 @@ const create = async (req, res) => {
     }catch(error){
         res
             .status(400)
-            .send({succes: false, msg:`${nameModel} wasn't created`, error})
+            .send({succes: false, msg:`${nameModel} wasn't created`, error:error.message})
     }
 };
 
@@ -84,4 +86,37 @@ const deleteOne = async (req, res) => {
     }
 }
 
-module.exports = {findAll, findOne, create, update, deleteOne,}
+const findAllHisAcounts = async(req, res) =>{
+    try{
+        const id = parseInt(req.params.id)
+        const result = await Model.findOne({
+        attributes: ['firstName', 'lastName', 'curp', 'active'],
+        where: {
+            id
+        },
+        include:{
+            attributes: ['state', 'type', 'id'],
+            model: ModelAccount,
+            include:{
+                where:{
+                    state: true,
+                },
+                attributes: ['cardNumber'],
+                model: ModelCard,
+            }
+        },
+        });
+        if(!result) throw new Error(`${nameModel} not found by ${id}`)
+        res
+            .status(200)
+            .send({success: true, result, msg: `${nameModel} found All`});
+
+    }catch(err){
+        console.log(err)
+        res
+          .status(404)
+          .send({succes: false, msg: err });
+    }
+  }
+
+module.exports = {findAll, findOne, create, update, deleteOne, findAllHisAcounts}

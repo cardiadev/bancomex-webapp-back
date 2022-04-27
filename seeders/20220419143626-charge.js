@@ -2,12 +2,29 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-     await queryInterface.bulkInsert('Charges', [{
-     name: 'Tarjeta',
-     amount: 1000,
-     createdAt: "2022-04-19 09:49:46.019-06",
-     updatedAt: "2022-04-19 09:49:46.019-06"
-     }], {});
+     await queryInterface.bulkInsert('Charges', [
+        {
+           name: 'Depositar',
+           amount: 0,
+           type: 'amount',
+           createdAt: new Date(),
+           updatedAt: new Date()
+         },
+         {
+            name: 'Retirar',
+            amount: 0.01,
+            type: 'amount',
+            createdAt: new Date(),
+            updatedAt: new Date()
+         },
+         {
+            name: 'Credito Hipotecario',
+            amount: 5,
+            type: 'percentage',
+            createdAt: new Date(),
+            updatedAt: new Date()
+         },
+      ], {});
   },
 
   async down (queryInterface, Sequelize) {
