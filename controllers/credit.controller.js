@@ -31,12 +31,15 @@ const findOne = async (req, res) => {
 const create = async(req, res)=>{
     try{
         
-        if (req.user.role !== 'Ejecutivo' || req.use.role !== 'Gerente') 
+        if (req.user.role == 'Cajero') 
             return res.status(401).json({ msg: 'Denied Role Access' })
             
-        req.body.EmployeeId = req.user.id;
+        req.body.credit.EmployeeId = req.user.id;
 
-        const result = await Model.create({...req.body});
+        const result = await Model.create({ ...req.body.credit });
+
+        
+
         res.status(200).send({
             success:true,
             result,
@@ -81,22 +84,20 @@ const deleteOne = async (req, res) => {
 //Count all credits
 const countCredits = async(req, res) =>{
     try{
-        const result = await Model.count({
-            where:{
-                status:true
-            }
-        });
+        const result = await Model.findAll({})
         res.status(200).send({
-            succes:true,
+            success:true,
             result,
             msg:`${nameModel} Total Credits found`
         });          
+    
     }catch(error){
         res
         .status(404)
         .send({success:false, msg:`${nameModel} wasn't found`})
     }
-    };
+
+};
 
 
 module.exports = {findAll, findOne, create, update, deleteOne, countCredits}
