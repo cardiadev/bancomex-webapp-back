@@ -7,10 +7,10 @@ const findAll = async (req, res) => {
     if(!result)
     return res
         .status(404)
-        .send({succes: false, msg: `${nameModel} not found` });
+        .send({success: false, msg: `${nameModel} not found` });
     res
         .status(200)
-        .send({succes: true, result, msg: `${nameModel} found All`});
+        .send({success: true, result, msg: `${nameModel} found All`});
 }
 
 //Endpoint: findByPk
@@ -20,10 +20,10 @@ const findByPk = async (req, res) => {
     if (!result)
         return res
             .status(400)
-            .send({ succes: false, msg: `${nameModel} not found `});
+            .send({ success: false, msg: `${nameModel} not found `});
     res
         .status(200)
-        .send({ succes: true, result, msg: `${nameModel} found with ${id}` });
+        .send({ success: true, result, msg: `${nameModel} found with ${id}` });
 };
 
 //  Endpoint: create
@@ -85,10 +85,55 @@ const update = async (req, res) => {
     }
   };
 
+  //Endpiont:Count  all Accounts
+  const countAccounts = async(req, res) => {
+    try{
+      const result = await Model.count({
+        where: {
+          status: true
+        }
+      });
+      res.status(200).send({
+        success:true,
+        result,
+        msg: `${nameModel} Total Accounts found`
+      });
+    }catch(error){
+        res
+        .status(404)
+        .send({ success: false, msg: `${nameModel} wasn't found` });
+      } 
+  };
+
+  const dineroTotalBank = async(req, res) =>{
+    try{
+      const result = await Model.findByPk({where: {
+        ClientId : 1
+      }})
+
+      res.status(200).send({
+        success:true,
+        result:result.amount,
+        msg:`${nameModel} Total Amount Bank`
+      });
+    }catch(error){
+      res
+      .status(404)
+      .send({ success: false, msg: `${nameModel} wasn't found` });
+
+
+    }
+  }
+
+
+
   module.exports = {
     findAll,
     findByPk,
     create,
     update,
-    deposit
+    deposit,
+    countAccounts,
+    deposit,
+    findByClientId
   }; 

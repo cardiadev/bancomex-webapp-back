@@ -15,5 +15,7 @@ router.post(`/${path}`, verifyToken, controller.create)
 router.put(`/${path}/:id`, verifyToken, controller.update)
 //Router: deleteOne
 router.delete(`/${path}/:id`, verifyToken, controller.deleteOne)
+//Route: count all
+router.get(`/${path}/countCredits`, verifyToken, controller.countCredits)
 
 module.exports = router;

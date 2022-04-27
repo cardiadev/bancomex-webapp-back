@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   CashCutOff.init({
     totalStart: DataTypes.DECIMAL,
     totalEnd: DataTypes.DECIMAL,
-    differemces: DataTypes.DECIMAL,
+    differences: DataTypes.DECIMAL,
     date: DataTypes.DATE,
     CashBoxId: DataTypes.INTEGER,
     EmployeeId: DataTypes.INTEGER

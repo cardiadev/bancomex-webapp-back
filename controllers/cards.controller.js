@@ -10,10 +10,10 @@ const findAll = async (req, res)=> {
     if(!result)
     return res
         .status(400)
-        .send({succes: false, msg: `${nameModel} not found`});
+        .send({success: false, msg: `${nameModel} not found`});
     res 
         .status(200)
-        .send({ succes: true, result, msg: `${nameModel} found All`});
+        .send({ success: true, result, msg: `${nameModel} found All`});
 };
 
 //Find byId
@@ -75,14 +75,14 @@ const create = async(req, res)=>{
     try{
         const result = await Model.create({...req.body});
         res.status(200).send({
-            succes:true,
+            success:true,
             result,
             msg:`${nameModel} was create successfully`,
     });
     }catch(error){
         res
         .status(404)
-        .send({succes:false,  msg:`${nameModel} wasn't created`})
+        .send({success:false,  msg:`${nameModel} wasn't created`})
 
     }
 };

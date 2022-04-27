@@ -1,13 +1,18 @@
 const bcrypt = require('bcryptjs');
 const Model = require('../models').Employee
+const BusinessUnit = require('../models').BusinessUnit;
 const nameModel = 'Employee';
 const saltBcrypt = 10;
 
 const { createToken } = require('../common/functions/authorization');
 
 const findAll = async (req, res) => {
-     const result = await Model.findAll();
-     console.log(req.user)
+     const result = await Model.findAll({
+          include: [
+               { model: BusinessUnit  }
+          ]
+     });
+
      if (!result)
        return res
          .status(404)
@@ -70,6 +75,20 @@ const create = async (req, res) => {
      
 }
 
+const update = async(req, res) =>{
+     try{
+         const { id } = req.params;
+         const result = await Model.update({ ...req.body}, {where: { id } });
+         res
+             .status(200)
+             .send({success: true, result, msg: `${nameModel} was update succesfully`});
+     }catch(error){
+         res
+             .status(404)
+             .send({success: false, msg: `${nameModel} wasn't update`});
+     }
+ };
+
 const login = async (req, res) => {
      const { code, password } = req.body;
 
@@ -124,5 +143,6 @@ module.exports = {
      findOneById,
      create,
      login,
+     update,
      changePassword
 }

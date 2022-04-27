@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Card.init({
-    cardNumber: DataTypes.STRING,
+    cardNumber: DataTypes.BIGINT,
     nip: DataTypes.INTEGER,
     dateExpiration: DataTypes.DATE,
     state: DataTypes.BOOLEAN,

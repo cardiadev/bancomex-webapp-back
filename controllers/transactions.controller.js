@@ -10,10 +10,10 @@ const findAll = async (req, res) => {
     if(!result)
     return res
         .status(404)
-        .send({succes: false, msg: `${nameModel} not found` });
+        .send({success: false, msg: `${nameModel} not found` });
     res
         .status(200)
-        .send({succes: true, result, msg: `${nameModel} found All`});
+        .send({success: true, result, msg: `${nameModel} found All`});
 }
 
 //Endpoint: findByPk
@@ -23,10 +23,10 @@ const findByPk = async (req, res) => {
     if (!result)
         return res
             .status(400)
-            .send({ succes: false, msg: `${nameModel} not found `});
+            .send({ success: false, msg: `${nameModel} not found `});
     res
         .status(200)
-        .send({ succes: true, result, msg: `${nameModel} found with ${id}` });
+        .send({ success: true, result, msg: `${nameModel} found with ${id}` });
 };
 
 //  Endpoint: create

@@ -14,7 +14,7 @@ module.exports = {
       totalEnd: {
         type: Sequelize.DECIMAL
       },
-      differemces: {
+      differences: {
         type: Sequelize.DECIMAL
       },
       date: {
