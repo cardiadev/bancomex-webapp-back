@@ -45,7 +45,7 @@ const create = async (req, res) => {
     const date = new Date();
     req.body.date = date.toISOString(); 
     const finishDate = new Date(`${req.body.date.split('T')[0]}T23:59:59`)
-    console.log(req.body.date)
+
     //Validate if there is a cashcutoff open
     const ccbo = await Model.findOne({
       where: {

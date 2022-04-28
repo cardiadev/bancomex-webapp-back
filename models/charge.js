@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Charge.init({
     name: DataTypes.STRING,
-    amount: DataTypes.DOUBLE
+    amount: DataTypes.DOUBLE,
+    active: DataTypes.BOOLEAN,
+    type: DataTypes.ENUM({
+      values: ['amount', 'percentage']
+    }),
   }, {
     sequelize,
     modelName: 'Charge',
