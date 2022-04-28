@@ -21,8 +21,6 @@ router.get(`/${path}/count/countAccounts`, verifyToken, controller.countAccounts
 router.get(`/${path}/count/totalAmountBank/id`, verifyToken, controller.totalAmountBank)
 // Route: deposit
 router.post(`/${path}/deposit`, verifyToken, controller.deposit)
-// Route: findByIdClient
-router.get(`/${path}/byClient/:id`, verifyToken, controller.findByClientId)
 
 
 

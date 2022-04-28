@@ -1,5 +1,7 @@
 
 const Model = require('../models').Card;
+const ModelAccount = require("../models").Account
+const ModelClient = require("../models").Client
 const nameModel = "Cards";
 
 //findAll
@@ -33,6 +35,40 @@ res
     .send({success: true, result, msg: `${nameModel} found whit ${id}`});
 
 };
+
+// Endpoint: find Card with his Account and Client by Card's Number
+const findByCardNumber = async (req, res) => {
+    try{
+      const {cardNumber} = req.params
+      const result = await Model.findOne({
+        attributes: ['cardNumber'],
+        where: {
+            cardNumber:cardNumber
+        },
+        include:{
+          attributes: ['state', 'type'],
+          model: ModelAccount,
+          include:{
+            attributes: ['firstName', 'lastName', 'active'],
+            model: ModelClient
+          }
+        },
+      });
+  
+      if(result){
+        res
+          .status(200)
+          .send({success: true, result, msg: `${nameModel} found`})
+      }else{
+        throw new Error(`${nameModel} not found`)
+      }
+  
+    }catch(error){
+      return res
+        .status(404)
+        .send({success: false, msg: error });
+    }
+  }
 
 //create
 const create = async(req, res)=>{
@@ -75,6 +111,6 @@ module.exports = {
     findAll,
     findOneByIb,
     create,
-    update
-     
+    update,
+    findByCardNumber
 }

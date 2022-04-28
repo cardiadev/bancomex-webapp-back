@@ -1,6 +1,8 @@
 const Model = require('../models').Credit
 const nameModel = "Credit";
 
+const guaranteeController = require('./guarantees.controller');
+
 const findAll = async (req, res) => {
     const result = await Model.findAll()
     if(!result)
@@ -31,15 +33,30 @@ const findOne = async (req, res) => {
 const create = async(req, res)=>{
     try{
         
-        if (req.user.role !== 'Ejecutivo' || req.use.role !== 'Gerente') 
+        if (req.user.role == 'Cajero') 
             return res.status(401).json({ msg: 'Denied Role Access' })
-            
-        req.body.EmployeeId = req.user.id;
+        
+        
 
-        const result = await Model.create({...req.body});
+        //default info when you create a credit    
+        req.body.credit.EmployeeId = req.user.id;
+        const date = new Date();
+        req.body.credit.applicationDate = date.toISOString(); 
+        req.body.credit.status = 'Pendiente';
+        req.body.credit.commission = 1;
+        req.body.credit.interest = 14.7;
+        
+        const credit = await Model.create({ ...req.body.credit });
+
+        // create all guarantees with this method, this method is in guarantees controller
+        // first parameter, you have to send an guarantees array
+        // second parameter, you have ti send the Credit Id created before
+        const guarantees = await guaranteeController.createMany( req.body.guarantees, credit.id );
+
         res.status(200).send({
             success:true,
-            result,
+            result: { credit, 
+                      guarantees },
             msg:`${nameModel} was created successfully `,
         });
 

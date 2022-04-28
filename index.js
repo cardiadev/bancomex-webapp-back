@@ -45,6 +45,9 @@ app.use(pathApi, transactionsRoutes);
 app.use(pathApi, clientRoutes);
 app.use(pathApi, creditRoutes);
 
+//STATIC
+app.use('/uploads', express.static('uploads'));
+
 app.listen(process.env.PORT, () => {
   console.log(`Server UP corriendo en http://localhost:${process.env.PORT}`);
 });

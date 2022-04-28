@@ -1,13 +1,18 @@
 const bcrypt = require('bcryptjs');
 const Model = require('../models').Employee
+const BusinessUnit = require('../models').BusinessUnit;
 const nameModel = 'Employee';
 const saltBcrypt = 10;
 
 const { createToken } = require('../common/functions/authorization');
 
 const findAll = async (req, res) => {
-     const result = await Model.findAll();
-     console.log(req.user)
+     const result = await Model.findAll({
+          include: [
+               { model: BusinessUnit  }
+          ]
+     });
+
      if (!result)
        return res
          .status(404)
@@ -23,7 +28,10 @@ const findOneById = async (req, res) => {
      const result = await Model.findAll({
           where: {
                id
-          }
+          },
+          include: [
+               { model: BusinessUnit  }
+          ]
      });
 
      if (!result)
