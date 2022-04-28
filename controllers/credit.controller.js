@@ -113,5 +113,22 @@ const countCredits = async(req, res) =>{
 
 };
 
+const countCreditEmployee = async (req,res) => {
+    try{
+        const result = await Model.count({
+            where:{
+                EmployeeId: req.user.id
+            }
+        });
+        res
+        .status(200)
+        .send({success: true, result, msg: `${nameModel} found All`});
+    } catch(error){
+        res
+          .status(404)
+          .send({succes: false, msg:`${nameModel} wasn't found` });
+    }
+}
 
-module.exports = {findAll, findOne, create, update, deleteOne, countCredits}
+
+module.exports = {findAll, findOne, create, update, deleteOne, countCredits, countCreditEmployee}
