@@ -79,24 +79,23 @@ const deleteOne = async (req, res) => {
 }
 
 //Count all credits
-const countCredits = async(req, res) =>{
+const countCredits = async(req, res) => {
     try{
-        const result = await Model.count({
-            where:{
-                status:true
-            }
-        });
-        res.status(200).send({
-            succes:true,
-            result,
-            msg:`${nameModel} Total Credits found`
-        });          
+      const result = await Model.count({
+        where: {
+          status: "Aprobado"
+        }
+      });
+      res.status(200).send({
+        success:true,
+        result,
+        msg: `${nameModel} Total credits found`
+      });
     }catch(error){
         res
         .status(404)
-        .send({success:false, msg:`${nameModel} wasn't found`})
-    }
-    };
-
+        .send({ success: false, msg: `${nameModel} wasn't found` });
+      } 
+  };
 
 module.exports = {findAll, findOne, create, update, deleteOne, countCredits}
