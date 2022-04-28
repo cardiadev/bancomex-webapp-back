@@ -28,7 +28,10 @@ const findOneById = async (req, res) => {
      const result = await Model.findAll({
           where: {
                id
-          }
+          },
+          include: [
+               { model: BusinessUnit  }
+          ]
      });
 
      if (!result)
