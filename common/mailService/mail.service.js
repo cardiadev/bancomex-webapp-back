@@ -40,4 +40,38 @@ const sendEmailWithCard = async function({email, firstName, lastName}, { cardNum
 
 }
 
-module.exports = { sendEmail, sendEmailWithCard }
+const sendEmailCreditAllow = async function( client, amount, cardNumber, cardBanco ) {
+
+  let info = await transporter.sendMail({
+    from: '"Administración BancoMex" <admin@bancomex.com>',
+    to: client.email,
+    subject: "Hola "+client.firstName+"! Tu credito ha sido aceptado!",
+    text: "Un gusto saludarte " + client.firstName + " " + client.lastName + "!",
+    html: "<p>Un gusto saludarte " + client.firstName + " " + client.lastName + "!</p>" +
+          `<p>Tu credito ha sido aceptado y se han depositado $${amount} MXN a tu cuenta</p>` +
+          `<p><b>Número de tarjeta: </b> ${cardNumber} </p>` +
+          `<p><b>Para pagar el credito, depositar a la siguiente cuenta: </b> ${cardBanco} </p>`,
+  });
+
+  console.log("Message sent: %s by %s", info.messageId, client.email);
+
+}
+
+const sendEmailCreditDenied = async function( client, amount ) {
+
+  let info = await transporter.sendMail({
+    from: '"Administración BancoMex" <admin@bancomex.com>',
+    to: client.email,
+    subject: "Hola "+client.firstName+"! Tu credito ha sido rechazado",
+    text: "Un gusto saludarte " + client.firstName + " " + client.lastName + "!",
+    html: "<p>Un gusto saludarte " + client.firstName + " " + client.lastName + "!</p>" +
+          `<p>Lamentamos informarte que tu credito ha sido por la cantidad de $${amount} MXN ha sido rechazado</p>` +
+          `<p>Para aclaraciones puede ponerse en contacto con el banco</p>` +
+          `<p>Llamenos: 3336359912</p>`,
+  });
+
+  console.log("Message sent: %s by %s", info.messageId, client.email);
+
+}
+
+module.exports = { sendEmail, sendEmailWithCard, sendEmailCreditAllow, sendEmailCreditDenied }

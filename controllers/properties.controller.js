@@ -29,16 +29,22 @@ const findByPk = async (req, res) => {
 //  Endpoint: create
 const create = async (req, res) => {
     try {
+
+      // Get info about the file upload by the front end
+      req.body.file = req.file.path;
       const result = await Model.create({ ...req.body });
       res.status(201).send({
         success: true,
         result,
         msg: `${nameModel} was created successfully`,
       });
+
+      console.log(`File ${req.file.mimetype} saved in ${req.file.destination}`);
+
     } catch (error) {
       res
         .status(400)
-        .send({ success: false, msg: `${nameModel} wasn't created` }, error);
+        .send({ success: false, msg: `${nameModel} wasn't created`, error });
     }
   };
 

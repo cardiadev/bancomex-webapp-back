@@ -90,7 +90,7 @@ const update = async (req, res) => {
     try{
       const result = await Model.count({
         where: {
-          status: true
+          state: true
         }
       });
       res.status(200).send({
@@ -105,9 +105,9 @@ const update = async (req, res) => {
       } 
   };
 
-  const dineroTotalBank = async(req, res) =>{
+  const totalAmountBank = async(req, res) =>{
     try{
-      const result = await Model.findByPk({where: {
+      const result = await Model.findOne({where: {
         ClientId : 1
       }})
 
@@ -125,8 +125,6 @@ const update = async (req, res) => {
     }
   }
 
-
-
   module.exports = {
     findAll,
     findByPk,
@@ -134,6 +132,7 @@ const update = async (req, res) => {
     update,
     deposit,
     countAccounts,
+    totalAmountBank,
     deposit,
     
   }; 

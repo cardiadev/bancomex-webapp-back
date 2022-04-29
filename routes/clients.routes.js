@@ -24,4 +24,6 @@ router.put(`/${path}/:id`, verifyToken, controller.update)
 //Route:deleteOne
 router.delete(`/${path}/:id`, verifyToken,controller.deleteOne)
 
+router.get(`/${path}/count/countClients`,verifyToken, controller.countClients)
+
 module.exports = router;

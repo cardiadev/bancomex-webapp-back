@@ -206,4 +206,21 @@ const findAllHisAcounts = async(req, res) =>{
     }
   }
 
-module.exports = {findAll, findOne, create, update, deleteOne, findAllHisAcounts}
+  const countClients = async(req, res) =>{
+    try{
+        const result = await Model.count({
+            where:{
+                EmployeeId: req.user.id
+            }
+        });
+        res
+        .status(200)
+        .send({success: true, result, msg: `${nameModel} found All`});
+    } catch(error){
+        res
+          .status(404)
+          .send({succes: false, msg: err });
+    }
+  };
+
+module.exports = {findAll, findOne, create, update, deleteOne, findAllHisAcounts, countClients}
