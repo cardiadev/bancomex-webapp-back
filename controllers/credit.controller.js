@@ -2,6 +2,10 @@ const Model = require('../models').Credit
 const Client = require('../models').Client
 const Account = require('../models').Account
 const Card = require('../models').Card
+const Employee = require('../models').Employee
+const Properties = require('../models').Property
+const Guarantee = require('../models').Guarantee
+
 const nameModel = "Credit";
 const { sendEmailCreditAllow, sendEmailCreditDenied } = require('../common/mailService/mail.service')
 
@@ -18,6 +22,29 @@ const findAll = async (req, res) => {
             .send({success: true, result, msg: `${nameModel} found All`});
 }
 
+const findFilterStatus = async (req, res) => {
+    
+    try {
+        const { status } = req.params;
+        let result;
+        if (!status || status === 'Todo' ) {
+            result = await Model.findAll();
+            return res.status(200).send({success: true, result, msg: `Creditos encontrados correctamente`});;
+        }
+    
+        result = await Model.findAll({
+            where: {
+               status 
+            }
+        })
+    
+        res.status(200).send({success: true, result, msg: `Creditos encontrados correctamente`});
+    } catch (error) {
+        res.status(200).send({success: false, msg: `Algo salio mal...`});
+    }
+    
+}
+
 const findOne = async (req, res) => {
     const { id } = req.params;
     const result = await Model.findAll({
@@ -32,6 +59,45 @@ const findOne = async (req, res) => {
         res
             .status(200)
             .send({ success: true , result, msg: `${nameModel} found with ${id}`});
+}
+
+const findOneJoin = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const credit = await Model.findOne({
+            where: {
+                id
+            },
+            include: [
+                { model: Client },
+                { model: Employee }
+            ]
+        });
+
+        const properties = await Properties.findAll({
+            include: [
+                { 
+                    model: Guarantee,
+                    where: {
+                        CreditId: id
+                    }
+                }
+            ]
+        })
+
+        if(!credit)
+            return res
+                .status(404)
+                .send({ success: false, msg: `${nameModel} not found`});
+
+            res
+                .status(200)
+                .send({ success: true , result: {credit, properties}, msg: `${nameModel} found with ${id}`});
+    } catch (error) {
+        res
+            .status(400)
+            .send({ success: true , msg: `Algo salio mal`});
+    }
 }
 
 const create = async(req, res)=>{
@@ -73,14 +139,13 @@ const create = async(req, res)=>{
 
 const allowOrDenyCredit = async(req, res) => {
 
+    //try {
     //cambiar status a 'Aprobado'
     const { id } = req.params;
     const { status } = req.body;
 
     if (req.user.role !== 'Gerente') 
         return res.status(401).json({ msg: 'Denied Role Access' })
-
-   try {
     
          const credit = await Model.findByPk(id);
          if (status === 'Aprobado') { 
@@ -134,10 +199,11 @@ const allowOrDenyCredit = async(req, res) => {
                                                        , { where: { id: accountBanco.id } } );
               const dataClient = await Client.findByPk(credit.ClientId);    
 
-              console.log(accountDebito)
              //enviar email avisando que su credito fue aceptado
-             console.log(accountBanco)
-             sendEmailCreditAllow(dataClient, credit.approvedAmount, accountDebito.Cards[0].cardNumber, accountBanco.Cards[0].cardNumber );     
+             console.log('aqui')
+             console.log(accountBanco.Cards[0].cardNumber)
+             console.log(accountBanco.Cards[0])
+             await sendEmailCreditAllow(dataClient, credit.approvedAmount, accountDebito.Cards[0].cardNumber, accountBanco.Cards[0].cardNumber );     
 
              return res.status(200).send({success: true, 
                                           result: deposito, 
@@ -150,15 +216,16 @@ const allowOrDenyCredit = async(req, res) => {
          }, { where: { id } } );    
 
          const dataClient = await Client.findByPk(credit.ClientId);
-         sendEmailCreditDenied( dataClient, credit.requestedAmount );
+         await sendEmailCreditDenied( dataClient, credit.requestedAmount );
 
          res.status(200).send({success: true, 
             result: deposito, 
             msg: `El credito solicitado por el cliente ${dataClient.firstName} ha sido rechazado`});
 
-    } catch (error) {
+    /*} catch (error) {
+        console.log(error)
        res.status(400).send({success: false, msg: 'Algo salio mal...'})
-    }
+    }*/
     
 }
 
@@ -237,5 +304,7 @@ module.exports = {
                   deleteOne, 
                   countCredits, 
                   countCreditEmployee,
-                  allowOrDenyCredit
+                  allowOrDenyCredit,
+                  findFilterStatus,
+                  findOneJoin
                 }
