@@ -3,6 +3,7 @@ const { sendEmail, sendEmailWithCard } = require('../common/mailService/mail.ser
 const Model = require('../models').Client
 const ModelAccount = require('../models').Account
 const ModelCard = require('../models').Card
+const ModelTransaction = require('../models').Transaction
 const Account = require("../models").Account
 const Card = require('../models').Card
 const Beneficiary = require('../models').Beneficiary
@@ -158,20 +159,38 @@ const findAllHisAcounts = async(req, res) =>{
     try{
         const id = parseInt(req.params.id)
         const result = await Model.findOne({
-        attributes: ['firstName', 'lastName', 'curp', 'active'],
+        attributes: ['firstName', 'lastName', 'rfc', 'active'],
         where: {
             id
         },
         include:{
             attributes: ['state', 'type', 'id'],
             model: ModelAccount,
-            include:{
+            include:[{
                 where:{
                     state: true,
                 },
                 attributes: ['cardNumber'],
+                required: false,  
                 model: ModelCard,
-            }
+                
+                
+            },{
+            where: {
+                id,
+            },
+            attributes: ['type','date', 'id'],
+            required:false,
+            model: ModelTransaction,
+        }
+        ]
+            // include: {
+            //     where: {
+            //         id
+            //     },
+            //     attributes: ['date'],
+            //     model: ModelTransaction,
+            // }
         },
         });
         if(!result) throw new Error(`${nameModel} not found by ${id}`)
