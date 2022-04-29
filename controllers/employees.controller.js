@@ -118,23 +118,33 @@ const login = async (req, res) => {
 
 const changePassword = async (req, res) => {
      
-     try {
+     //try {
           const { id, role } = req.user;
-          const { password } = req.body;
+          const { password, passwordBefore } = req.body;
+          
+          const employee = await Model.findByPk(id);
+
+          if (!employee) 
+               return res.status(404).send({success: false, msg: `Employee not found`});
+
+          const employeeCorrect = await bcrypt.compare( passwordBefore, employee.password );
+
+          if (!employeeCorrect) 
+               return res.status(404).send({success: false, msg: `Credenciales incorrectas`});
+
           //Encrypt the password
           const passEncrypted = await bcrypt.hash(password, saltBcrypt);
-
-          const result = await Model.update( { password: passEncrypted }, { where: id } );
+          const result = await Model.update( { password: passEncrypted }, { where: { id: id } } );
           res.status(200).send({
                success: true,
                result,
-               msg: `Password ${result.firstName} was updated successfully`,
+               msg: `La contraseña fue modificada correctamente`,
              });
-     } catch (error) {
+     /*} catch (error) {
           res
                .status(404)
                .send({ success: false, msg: `Password ${nameModel} wasn't updated`, error });
-     }
+     }*/
 }
 
 module.exports = {

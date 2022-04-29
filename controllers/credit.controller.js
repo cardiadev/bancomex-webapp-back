@@ -80,7 +80,7 @@ const allowOrDenyCredit = async(req, res) => {
     if (req.user.role !== 'Gerente') 
         return res.status(401).json({ msg: 'Denied Role Access' })
 
-   //try {
+   try {
     
          const credit = await Model.findByPk(id);
          if (status === 'Aprobado') { 
@@ -152,9 +152,13 @@ const allowOrDenyCredit = async(req, res) => {
          const dataClient = await Client.findByPk(credit.ClientId);
          sendEmailCreditDenied( dataClient, credit.requestedAmount );
 
-    /*} catch (error) {
+         res.status(200).send({success: true, 
+            result: deposito, 
+            msg: `El credito solicitado por el cliente ${dataClient.firstName} ha sido rechazado`});
+
+    } catch (error) {
        res.status(400).send({success: false, msg: 'Algo salio mal...'})
-    }*/
+    }
     
 }
 
