@@ -120,10 +120,6 @@ const changePassword = async (req, res) => {
      
      try {
           const { id, role } = req.user;
-
-          if (role !== 'Empleado') 
-               return res.status(401).json({ msg: 'Denied Role Access' }) 
-
           const { password } = req.body;
           //Encrypt the password
           const passEncrypted = await bcrypt.hash(password, saltBcrypt);

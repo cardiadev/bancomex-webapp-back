@@ -19,4 +19,7 @@ router.delete(`/${path}/:id`, verifyToken, controller.deleteOne)
 router.get(`/${path}/countCredits`, verifyToken, controller.countCredits)
 //Route: count credits created by a certain employee
 router.get(`/${path}/count/countEmployeesCredits`, verifyToken, controller.countCreditEmployee)
+
+router.post(`/${path}/allowOrDenyCredit/:id`, verifyToken, controller.allowOrDenyCredit )
+
 module.exports = router;
