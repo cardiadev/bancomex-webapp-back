@@ -156,15 +156,18 @@ const allowOrDenyCredit = async(req, res) => {
 
               } });     
 
+            
+              //console.log(bancomex);
               if (!bancomex) 
                  return res.status(404).send({success: false, msg: 'Bancomex no está disponible'});
           
-             const accountBanco = await Account.findOne({id: bancomex.id, include: [{model: Card}]});      
+             console.log(bancomex.id)
+             const accountBanco = await Account.findOne({ where: { ClientId: bancomex.id } , include: [{model: Card}]}); 
+             console.log(accountBanco)   
 
-             if ( accountBanco.account < req.body.approvedAmount ) 
+             if ( req.body.approvedAmount > accountBanco.amount ) 
                  return res.status(404).send({success: false, msg: 'Bancomex no cuenta con los recursos suficientes'});     
 
-          
              const date = new Date();
              req.body.approvalDate = date.toISOString();
              const { approvedAmount, approvalDate } = req.body;     
@@ -188,22 +191,29 @@ const allowOrDenyCredit = async(req, res) => {
               });       
 
               if (!accountDebito) 
-                 return res.status(404).send({success: true, msg: 'El cliente no tiene una cuenta de debito'});
+                 return res.status(404).send({success: false, msg: 'El cliente no tiene una cuenta de debito'});
 
 
-              const total = Number(credit.approvedAmount + accountDebito.amount);
+              const total = Number(req.body.approvedAmount) + Number(accountDebito.amount);
               const deposito = await Account.update({ amount: total }, { where: { id: accountDebito.id } });
-              const totalBanco = accountBanco.amount - total;       
+              const totalBanco = accountBanco.amount - Number(req.body.approvedAmount);       
 
               const bancoUpdate = await Account.update({ amount: totalBanco }
                                                        , { where: { id: accountBanco.id } } );
               const dataClient = await Client.findByPk(credit.ClientId);    
 
+              if( !accountDebito || !accountBanco)
+                  return res.status(404).send({success: false, msg: 'Algo salio mal al querer hacer la transacción'});
+
+              let cardBancoNumber = await Card.findOne({ where: { AccountId: accountBanco.id }})
+              if ( !cardBancoNumber || cardBancoNumber.cardNumber === null) {
+                 cardBancoNumber = '415231342732799000'
+              }
+
+            const cardNumberDeposito = accountDebito.Cards[0].cardNumber;
+
              //enviar email avisando que su credito fue aceptado
-             console.log('aqui')
-             console.log(accountBanco.Cards[0].cardNumber)
-             console.log(accountBanco.Cards[0])
-             await sendEmailCreditAllow(dataClient, credit.approvedAmount, accountDebito.Cards[0].cardNumber, accountBanco.Cards[0].cardNumber );     
+             await sendEmailCreditAllow(dataClient, credit.approvedAmount, cardNumberDeposito, cardBancoNumber.cardNumber);     
 
              return res.status(200).send({success: true, 
                                           result: deposito, 
@@ -219,7 +229,7 @@ const allowOrDenyCredit = async(req, res) => {
          await sendEmailCreditDenied( dataClient, credit.requestedAmount );
 
          res.status(200).send({success: true, 
-            result: deposito, 
+            result: updateStatus, 
             msg: `El credito solicitado por el cliente ${dataClient.firstName} ha sido rechazado`});
 
     /*} catch (error) {
