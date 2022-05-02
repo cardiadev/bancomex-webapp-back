@@ -66,21 +66,23 @@ const update = async (req, res) => {
   //Find ammount and type of Charge
   const findChargeByName = (name, t) => ModelCharge.findOne({
     attributes: ['id', 'amount', 'type'],
+    transaction: t,
     where: {
       name,
       active: true
     }
-  }, { transaction: t });
+  });
 
   // Find id and amount of Account by his Card
   const findAccountByCard = (whereCard, t) => ModelCard.findOne({
     attributes: ['cardNumber'],
+    transaction: t,
     where: whereCard,
     include:{
       attributes: ['id', 'state', 'amount', 'type'],
       model: ModelAccount
     },
-  }, { transaction: t });
+  });
 
   const applyCharge = ({initialAmount, amount, type}, chargeAmount, chargeType) => {
     if(chargeType === 'percentage') chargeAmount = amount * chargeAmount / 100
@@ -100,22 +102,23 @@ const update = async (req, res) => {
 
   // Update Account's amount
   const incrementAccount = (amount, id, t) => ModelAccount.increment({amount},{
+    transaction: t,
     where: {
       id,
       state: true
     }
-  }, {transaction: t });
+  });
 
   // EndPoint: Create Transaction
   const generate = async (req, res) => {
     try {
-      const {amount, type, cardNumber} = req.body
+      const {amount, type, cardNumber, box} = req.body
       const data = {
         date: new Date(),
         type,
         amount: Math.abs(parseFloat(amount)),
-        //EmployeeId,
-        //CashBoxId,
+        EmployeeId: req.user.id,
+        CashBoxId:box
         //AccountId,
         //ChargeId,
       }
@@ -148,7 +151,7 @@ const update = async (req, res) => {
           throw new Error(`Account not increment ${prove.amount}`)
         }
         console.log(increment[0][0][0].amount)
-        //throw new Error(`Prueba xD`)
+        //throw new Error(`Prueba de transaccion`)
         return await Model.create(data, { transaction: t });
       });
 
