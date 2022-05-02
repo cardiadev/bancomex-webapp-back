@@ -6,8 +6,18 @@ module.exports = {
       "Charges",
       [
         {
-          name: "Cargo 1",
-          amount: 300,
+          name: "Depositar",
+          amount: 0,
+          active: true,
+          type: 'amount',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Retirar",
+          amount: 0.01,
+          active: true,
+          type: 'amount',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
