@@ -213,7 +213,7 @@ const allowOrDenyCredit = async(req, res) => {
             const cardNumberDeposito = accountDebito.Cards[0].cardNumber;
 
              //enviar email avisando que su credito fue aceptado
-             await sendEmailCreditAllow(dataClient, credit.approvedAmount, cardNumberDeposito, cardBancoNumber.cardNumber);     
+             await sendEmailCreditAllow(dataClient, req.body.approvedAmount, cardNumberDeposito, cardBancoNumber.cardNumber);     
 
              return res.status(200).send({success: true, 
                                           result: deposito, 
